@@ -1,0 +1,75 @@
+export default [
+  {
+    name: "name",
+    type: "text",
+    placeholder: "Alexei Ward",
+    label: "Name",
+    pattern: "^[a-zA-Z]+(?: [a-zA-Z]+)*$",
+    errorMessage: "Name is cumpulsory",
+  },
+  {
+    name: "email",
+    type: "email",
+    placeholder: "alexei@mail.com",
+    label: "Email Address",
+
+    errorMessage: "It should be a valid email address",
+  },
+  {
+    name: "phone",
+    type: "text",
+    placeholder: "+1 202-555-0136",
+    label: "Phone Number",
+    errorMessage: "Input correct phone number",
+  },
+  {
+    name: "address",
+    type: "text",
+    placeholder: "1137 Williams Avenue",
+    label: "Your Address",
+    errorMessage: "Input your address",
+  },
+  {
+    name: "zipcode",
+    type: "text",
+    placeholder: "10001",
+    label: "Zip Code",
+    errorMessage: "Enter valid zipcode",
+  },
+  {
+    name: "city",
+    type: "text",
+    placeholder: "New York",
+    label: "City",
+    errorMessage: "City is cumpulsory",
+  },
+  {
+    name: "country",
+    type: "text",
+    placeholder: "United States",
+    label: "Country",
+    errorMessage: "Country is cumpulsory",
+  },
+  {
+    name: "paymentMethod",
+    type: "radio",
+    options: [
+      { value: "e-Money", label: "e-Money" },
+      { value: "Cash on Delivery", label: "Cash on Delivery" },
+    ],
+  },
+  {
+    name: "eMoneyNumber",
+    type: "text",
+    placeholder: "238521993",
+    label: "e-Money Number",
+    errorMessage: "e-Money number is cumpulsory",
+  },
+  {
+    name: "eMoneyPin",
+    type: "text",
+    placeholder: "6891",
+    label: "e-Money PIN",
+    errorMessage: "e-Money pin is cumpulsory",
+  },
+];
