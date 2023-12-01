@@ -27,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
     width: 10rem;
     height: 3rem;
     // background: #4c4c4c;
-    color: #fff;
+    color: #000;
     font-size: 0.8125rem;
     font-style: normal;
     font-weight: 700;
