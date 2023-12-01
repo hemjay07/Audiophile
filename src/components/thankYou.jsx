@@ -175,8 +175,11 @@ export default function ({ total }) {
                       </Items>
                     );
                   })}
-
-                <Others>and {totalNumberInCart - 1} other item(s)</Others>
+                {totalNumberInCart > 1 ? (
+                  <Others>and {totalNumberInCart - 1} other item(s)</Others>
+                ) : (
+                  <Others>and ❤️</Others>
+                )}
               </div>
               <GrandTotal>
                 <p>GRAND TOTAL</p>
