@@ -144,6 +144,13 @@ export default function ({ total }) {
   const firstItemData = Object.entries(cart)[0];
 
   const totalNumberInCart = Object.entries(cart).length;
+
+  // scroll to top to display the thankyou message
+  scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
   return (
     <>
       {thankYou ? (
