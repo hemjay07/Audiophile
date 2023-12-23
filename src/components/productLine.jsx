@@ -6,8 +6,6 @@ import headphonesThumbnail from "/assets/shared/desktop/image-category-thumbnail
 import speakersThumbnail from "/assets/shared/desktop/image-category-thumbnail-speakers.png";
 import earphonesThumbnail from "/assets/shared/desktop/image-category-thumbnail-earphones.png";
 const Products = styled.div`
-  // border: 2px solid red;
-  // position: absolute;
   top: 0;
   width: 80%;
   max-width: 2100px;
@@ -17,6 +15,7 @@ const Products = styled.div`
   margin: auto;
   justify-content: space-between;
   gap: 2.6rem;
+
   h3 {
     color: #000;
     font-size: 0.9375rem;
@@ -24,6 +23,7 @@ const Products = styled.div`
     line-height: normal;
     letter-spacing: 0.06694rem;
   }
+
   div {
     text-align: center;
     position: relative;
@@ -31,6 +31,7 @@ const Products = styled.div`
     height: 12rem;
     border-radius: 0.5rem;
     background: #f1f1f1;
+
     img {
       width: 9rem;
       height: 8rem;
@@ -38,6 +39,7 @@ const Products = styled.div`
       top: -2.5rem;
     }
   }
+
   p {
     opacity: 0.5;
     margin-top: 0.5rem;
@@ -47,12 +49,14 @@ const Products = styled.div`
       opacity: 1;
     }
   }
+
   span {
     color: #d87d4a;
     opacity: 1;
     font-weight: 900;
     margin-left: 0.3rem;
   }
+
   @media (max-width: 800px) {
     flex-direction: column;
     gap: 3.5rem;

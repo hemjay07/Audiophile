@@ -10,19 +10,20 @@ const Remarks = styled.div`
   text-align: center;
   width: 80%;
   margin: 8rem auto;
-  //   margin-top: 8rem;
+
   grid-template-areas:
     "one two"
     "three four";
+
   :nth-child(1) {
     grid-area: one;
-    // border: solid 2px red;
 
     img {
       width: 100%;
       border-radius: 0.5rem;
     }
   }
+
   :nth-child(2) {
     grid-area: three;
   }
@@ -36,10 +37,12 @@ const Remarks = styled.div`
     letter-spacing: 0.0625rem;
     margin: 2rem 0;
   }
+
   span {
     color: #d87d4a;
     border: none;
   }
+
   p {
     color: #000;
     text-align: center;
@@ -50,19 +53,24 @@ const Remarks = styled.div`
     line-height: 1.5625rem;
     opacity: 0.5;
   }
+
   @media (min-width: 1250px) {
     grid-auto-columns: 1fr;
+
     :nth-child(1) {
       grid-area: two;
     }
+
     :nth-child(2) {
       grid-area: one;
       margin: auto;
     }
+
     p {
       text-align: left;
       padding-right: 3rem;
     }
+
     h2 {
       text-align: left;
       font-size: 2.5rem;

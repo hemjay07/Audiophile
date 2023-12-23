@@ -1,17 +1,17 @@
-import React, { useState, useContext } from "react";
-import { cartContext } from "../App";
+import React from "react";
 import styled from "styled-components";
+import { useCartContext } from "../context/cartContext";
+
+// Create a styled component for counter controls
 const CounterControler = styled.div`
   display: flex;
-  // border: solid 3px blue;
   align-items: baseline;
   justify-content: space-evenly;
   width: 7.5rem;
   background: #f1f1f1;
+
   button {
     width: unset;
-    // background: #4c4c4c;
-    // color: #fff;
     font-size: unset;
     font-style: normal;
     font-weight: unset;
@@ -19,20 +19,41 @@ const CounterControler = styled.div`
     opacity: 0.25;
   }
 `;
-export default function ({ productId }) {
-  // const [count, setCount] = useState(productQuantity);
 
-  const { cart, setCart } = useContext(cartContext);
+/**
+ * Counter component for managing the quantity of a product in the cart.
+ * @param {Object} props - The component props.
+ * @param {string} props.productId - The ID of the product.
+ * @returns {JSX.Element} The Counter component.
+ */
+export default function Counter({ productId }) {
+  // Retrieve cart context
+  const { cart, setCart } = useCartContext();
 
+  // if this product is not in the cart, add it to the cart with a quantity of 0
+  if (!cart.productId) {
+    setCart((prev) => ({ ...prev, [productId]: 0 }));
+  }
+
+  // const [cart, setCart] = useState({ 1: 2 });
+
+  /**
+   * Add a product to the cart.
+   */
   function handleAdd() {
     setCart((prev) => {
       return { ...prev, [productId]: cart[productId] + 1 };
     });
   }
+
+  /**
+   * Handles the subtraction process in the cart.
+   * If the quantity of the product is 1, it deletes the product from the cart.
+   * Otherwise, it decrement the quantity by 1.
+   */
   function handleSubtract() {
     setCart((prev) => {
       const quantity = prev[productId];
-      console.log(quantity, "aohoewgnwng");
       if (quantity == 1) {
         const { [productId]: deletedProduct, ...otherItems } = prev;
         return otherItems;
@@ -42,23 +63,12 @@ export default function ({ productId }) {
     });
   }
 
+  // Return complete counter controller UI
   return (
     <CounterControler>
-      <button
-        // onClick={() => {
-        //   count > 1 ? setCount((prev) => prev - 1) : null;
-        // }}
-        onClick={handleSubtract}
-      >
-        -
-      </button>
-      <h1>{cart[productId]}</h1>
-      <button
-        // onClick={() => setCount((prev) => prev + 1)}
-        onClick={handleAdd}
-      >
-        +
-      </button>
+      <button onClick={handleSubtract}>-</button>
+      <h1 data-testid="count">{cart[productId]}</h1>
+      <button onClick={handleAdd}>+</button>
     </CounterControler>
   );
 }

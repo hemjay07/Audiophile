@@ -1,39 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-
-import hamburger from "/assets/shared/tablet/icon-hamburger.svg";
-import cart from "/assets/shared/desktop/icon-cart.svg";
 import logo from "/assets/shared/desktop/logo.svg";
-
 import { Link } from "react-router-dom";
 import {
   AiFillFacebook,
   AiOutlineInstagram,
   AiOutlineTwitter,
 } from "react-icons/ai";
+
 const IconWrapper = styled.div`
-  // to add custom style to the each of the icon
   .socials__logo {
     font-size: 2rem;
+
     &:hover {
       color: #d87d4a;
       cursor: pointer;
     }
   }
 `;
+
 const Logo = styled.img`
   margin: auto;
+
   @media screen and (min-width: 770px) {
     margin: 0;
   }
 `;
+
 const Container = styled.div`
   text-align: center;
   background-color: black;
   color: white;
   margin: auto;
   margin-bottom: 0;
-
   padding: 3.5rem 10% 2.8rem 10%;
   display: grid;
   gap: 3rem;
@@ -49,29 +48,36 @@ const Container = styled.div`
   :nth-child(1) {
     grid-area: one;
   }
+
   :nth-child(2) {
     grid-area: two;
   }
+
   :nth-child(3) {
     grid-area: three;
   }
+
   :nth-child(4) {
     grid-area: four;
   }
+
   :nth-child(5) {
     grid-area: five;
   }
 
   @media screen and (min-width: 770px) {
     text-align: left;
+
     grid-template-areas:
       "one one"
       "two two"
       "three three"
       "four five";
   }
+
   @media screen and (min-width: 1440px) {
     text-align: left;
+
     grid-template-areas:
       "one two"
       "three five"
@@ -88,9 +94,11 @@ const Directories = styled.nav`
     font-size: 0.8rem;
     font-weight: 700;
   }
+
   @media screen and (min-width: 770px) {
     flex-direction: row;
   }
+
   @media screen and (min-width: 1440px) {
     justify-content: space-around;
   }

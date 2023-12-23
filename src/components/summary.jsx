@@ -1,24 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { nanoid } from "nanoid";
-
-import SampleImage from "/assets/cart/image-xx59-headphones.jpg";
 import productData from "../data.json";
 import ThankYou from "./thankYou";
-import { useContext } from "react";
-import { cartContext } from "../App";
 import { figureOutProductsActualName } from "../pages/productDetail/productDetail";
+import { useCartContext } from "../context/cartContext";
 const Summary = styled.div`
-  //   border: solid 2px red;
   padding: 2rem;
   background: #fff;
   width: 100%;
   border-radius: 0.5rem;
+
   h3 {
     font-size: 1.125rem;
     letter-spacing: 0.08038rem;
     margin-bottom: 2rem;
   }
+
   button {
     width: 100%;
     background: #d87d4a;
@@ -30,16 +28,20 @@ const Summary = styled.div`
     margin-top: 2rem;
   }
 `;
+
 const Items = styled.div`
   margin-bottom: 1rem;
+
   img {
     width: 4rem;
     height: 4rem;
   }
+
   display: flex;
   align-items: center;
   gap: 0.5rem;
 `;
+
 const ItemPrice = styled.div``;
 const Multiple = styled.p`
   margin-left: auto;
@@ -49,10 +51,12 @@ const Multiple = styled.p`
   font-weight: 700;
   line-height: 1.5625rem;
 `;
+
 const Fees = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
+
   p:first-of-type {
     font-size: 0.9375rem;
 
@@ -60,6 +64,7 @@ const Fees = styled.div`
     line-height: 1.5625rem;
     opacity: 0.5;
   }
+
   p:last-of-type {
     font-size: 1.125rem;
     font-weight: 700;
@@ -71,7 +76,7 @@ const GrandTotal = styled.p`
 `;
 
 export default function ({ showThanks }) {
-  const { cart, setCart } = useContext(cartContext);
+  const { cart } = useCartContext();
   let total = 0;
   const shippingFee = 50;
   let vat = total / 10;

@@ -1,11 +1,15 @@
-import React, { useState, useContext } from "react";
+// Importing required components and values from modules
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+
+import productData from "../../data.json";
+
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import Button from "../../components/button";
 import GoBackButton from "../../components/goBackButton";
-import productData from "../../data.json";
-import { useParams } from "react-router-dom";
-import { cartContext } from "../../App";
+
+// Importing styled components
 import {
   Description,
   ProductDisplay,
@@ -21,35 +25,45 @@ import {
   Others,
   CounterControler,
 } from "./productDetailStyled";
+import { useCartContext } from "../../context/cartContext";
+
+// Function to retrieve name of product
 export function figureOutProductsActualName(name) {
-  const productName = name.split(" ");
-  productName.pop();
-  const productsActualName = productName.join(" ");
-  return productsActualName;
+  // Splits the name and joins it together to create a new name
+  return name.split(" ").slice(0, -1).join(" ");
 }
+
+// Main function for the script
+
 export default function () {
-  let params = useParams();
-  const productId = params.productId;
+  // Retrieve productID from current URL parameters
+  let { productId } = useParams();
+
+  // Find matching product data
   const product = productData.find((product) => product.id == productId);
+
+  // Set initial counter state
   const [count, setCount] = useState(1);
-  const include = product.includes.map((item, index) => {
-    return (
-      <div key={index}>
-        <span>{`${item.quantity}x`}</span>
-        <span>{item.item}</span>
-      </div>
-    );
-  });
-  const gallery = Object.values(product.gallery).map((item, index) => {
-    return (
-      <picture key={index}>
-        <source srcSet={item.desktop} media="(min-width: 1240px)" />
-        <source srcSet={item.tablet} media="(min-width: 768px)" />
-        <img src={item.mobile} alt="Description" />
-      </picture>
-    );
-  });
-  const others = product.others.map((item, index) => {
+
+  // Generate HTML for 'includes' section of product details
+  const includesHtml = product.includes.map((item, index) => (
+    <div key={index}>
+      <span>{`${item.quantity}x`}</span>
+      <span>{item.item}</span>
+    </div>
+  ));
+
+  // Generate HTML for product gallery
+  const galleryHtml = Object.values(product.gallery).map((item, index) => (
+    <picture key={index}>
+      <source srcSet={item.desktop} media="(min-width: 1240px)" />
+      <source srcSet={item.tablet} media="(min-width: 768px)" />
+      <img src={item.mobile} alt="Description" />
+    </picture>
+  ));
+
+  // Generate HTML for 'others' section
+  const othersHtml = product.others.map((item, index) => {
     const clickedProduct = productData.find((x) => item.slug == x.slug);
     return (
       <div key={index}>
@@ -64,27 +78,35 @@ export default function () {
     );
   });
 
-  const featuresDescription = product.features
-    .split("\n\n")
-    .map((description, index) => <p key={index}>{description}</p>);
+  // Parsing feature descriptions
+  const parsedFeatures = product.features.split("\n\n");
 
-  console.log("reloaded");
-  const { cart, setCart } = useContext(cartContext);
+  // Access setCart function from cart context
+  const { setCart } = useCartContext();
+
+  // Function to handle updates to cart
   function handleCartUpdate() {
+    // Increase quantity of product in cart
     setCart((prev) => {
-      // if the product exist in the cart already, add the previous quantity to the count else create the product in the cart
       const newQuantity = prev[productId] ? prev[productId] + count : count;
+      // Return new quantity
       return {
         ...prev,
         [productId]: newQuantity,
       };
     });
-    scrollTo({
+    // set the count to 1 so that the user can choose if to add more
+    setCount(1);
+
+    // Scroll page to top after update to cart
+    window.scrollTo({
       top: 0,
       left: 0,
       behavior: "smooth",
     });
   }
+
+  // Return complete component JSX
   return (
     <>
       <Navbar />
@@ -109,40 +131,36 @@ export default function () {
             <p>{product.description}</p>
             <h4>$ {product.price.toLocaleString("en-US")}</h4>
             <AddToCartAndCounterControler>
-              {/* I added the key after I realize that the counter continues and
-              doesnt reset to 1 when I change products. The key basically tells
-              react to create the component from the scratch */}
-              {/* <Counter key={product.name} /> */}
+              {/* Counter for selecting product quantity */}
               <CounterControler>
                 <button
                   onClick={() => {
-                    if (count != 1) {
-                      setCount(count - 1);
-                    }
+                    count > 1 && setCount(count - 1);
                   }}
                 >
                   -
                 </button>
-                <h1>{count}</h1>
+                <h1 data-testid="count">{count}</h1>
                 <button onClick={() => setCount(count + 1)}>+</button>
               </CounterControler>
+              {/* Add to Cart button */}
               <AddToCart onClick={handleCartUpdate}>ADD TO CART</AddToCart>
-            </AddToCartAndCounterControler>
+            </AddToCartAndCounterControler>{" "}
           </Description>
         </MainProduct>
         <FeaturesAndInTheBox>
           <Features>
             <h2>FEATURES</h2>
-            {featuresDescription}
+            {parsedFeatures.map((description, index) => (
+              <p key={index}> {description} </p>
+            ))}
           </Features>
 
           <InTheBox>IN THE BOX</InTheBox>
-          <Include> {include}</Include>
+          <Include> {includesHtml} </Include>
         </FeaturesAndInTheBox>
-        <Gallery> {gallery}</Gallery>
-
-        <AlsoLike>YOU MAY ALSO LIKE</AlsoLike>
-        <Others> {others}</Others>
+        <Gallery> {galleryHtml} </Gallery>
+        <AlsoLike>YOU MAY ALSO LIKE</AlsoLike> <Others> {othersHtml}</Others>
       </ProductDisplay>
 
       <Footer />

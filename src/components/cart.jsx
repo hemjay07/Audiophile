@@ -1,26 +1,23 @@
-import React, { useState } from "react";
-import { nanoid } from "nanoid";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { useContext } from "react";
-import { cartContext } from "../App";
+import { nanoid } from "nanoid";
 import styled from "styled-components";
-import SampleImage from "/assets/cart/image-xx59-headphones.jpg";
 import productData from "../data.json";
 import Counter from "./counter";
 import { figureOutProductsActualName } from "../pages/productDetail/productDetail";
-const Cart = styled.div`
-  z-index: 2;
-  width: 20rem;
+import { useCartContext } from "../context/cartContext";
 
-  background-color: #fff;
-  color: #000;
+const Cart = styled.div`
   position: absolute;
   top: 120%;
   left: 50%;
-  transform: translateX(-50%);
+  width: 20rem;
   padding: 1.5rem;
+  background-color: #fff;
+  color: #000;
+  transform: translateX(-50%);
   border-radius: 0.5rem;
+  z-index: 2;
 
   @media (min-width: 768px) {
     transform: revert;
@@ -29,14 +26,17 @@ const Cart = styled.div`
     width: 23rem;
   }
 `;
+
 const Top = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.4rem;
+
   p:first-of-type {
     font-size: 1.125rem;
     letter-spacing: 0.08038rem;
   }
+
   p:last-of-type {
     font-size: 0.9375rem;
     font-weight: 500;
@@ -49,6 +49,7 @@ const Top = styled.div`
     }
   }
 `;
+
 const Items = styled.div`
   padding: 0 0.5rem;
   max-height: 300px;
@@ -56,43 +57,40 @@ const Items = styled.div`
   border: 1px solid #ccc; /* Optional: Add a border for visibility */
   border-radius: 0.5rem;
 `;
+
 const Item = styled.div`
   img {
     width: 4rem;
     height: 4rem;
     margin-right: 1rem;
   }
+
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  // gap: 0.5rem;
-  button {
-    // margin-left: auto;
-  }
 `;
+
 const ItemPrice = styled.div`
-  // border: solid 2px red;
   display: flex;
 `;
+
 const Total = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 1.5rem;
 `;
+
 const Checkout = styled.button`
   width: 100%;
   margin-top: 0.5rem;
   background-color: #d87d4a;
   cursor: pointer;
 `;
+
 export default function () {
-  const { cart, setCart } = useContext(cartContext);
-  // const [totalCart, setTotalCart] = useState(0);
-  console.log(cart, "alongwongwongwong");
-  // set the total cart
-  // setTotalCart(Object.keys(cart).length);\
+  const { cart, setCart } = useCartContext();
+
   const totalCart = Object.keys(cart).length;
   let total = 0;
   const navigate = useNavigate();
@@ -114,7 +112,6 @@ export default function () {
             total = total + thisProduct.price * item[1];
 
             const key = nanoid();
-            // console.log(thisProduct, "owbgowbgwobg");
             return (
               <Item key={key}>
                 <ItemPrice>
@@ -124,7 +121,7 @@ export default function () {
                     <p>${thisProduct.price.toLocaleString("en-US")}</p>
                   </div>
                 </ItemPrice>{" "}
-                <Counter productId={item[0]} productQuantity={item[1]} />
+                <Counter productId={item[0]} />
               </Item>
             );
           })

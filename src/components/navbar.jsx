@@ -7,12 +7,12 @@ import logo from "/assets/shared/desktop/logo.svg";
 import { Link } from "react-router-dom";
 import CartItems from "./cart";
 import Overlay from "./overlay";
-import { cartContext } from "../App";
 
 // import ProductLine from "./productLine";
 import headphonesThumbnail from "/assets/shared/desktop/image-category-thumbnail-headphones.png";
 import speakersThumbnail from "/assets/shared/desktop/image-category-thumbnail-speakers.png";
 import earphonesThumbnail from "/assets/shared/desktop/image-category-thumbnail-earphones.png";
+import { useCartContext } from "../context/cartContext";
 const Container = styled.div`
   position: relative;
   width: 100%;
@@ -24,8 +24,6 @@ const Container = styled.div`
   justify-content: space-between;
   padding: 2rem 10%;
   z-index: 1; //so its positioned above the content of the page, remember the overlay is a part of the container
-  @media screen and (min-width: 770px) {
-  }
 
   ::after {
     content: "";
@@ -36,6 +34,7 @@ const Container = styled.div`
     border-bottom: solid 0.1px rgba(225, 225, 225, 0.1);
     transform: translateX(-50%);
   }
+
   h3 {
     color: #000;
     font-size: 0.9375rem;
@@ -55,6 +54,7 @@ const Directories = styled.div`
   color: black;
   display: none;
   gap: 4rem;
+
   h3 {
     color: #fff;
     font-size: 0.8125rem;
@@ -65,9 +65,11 @@ const Directories = styled.div`
       color: #d87d4a;
     }
   }
+
   @media screen and (min-width: 1140px) {
     display: flex;
   }
+
   h3 {
     font-size: 0.8rem;
     font-weight: 700;
@@ -75,16 +77,17 @@ const Directories = styled.div`
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
+
   &:hover {
     color: #d87d4a;
   }
+
   p {
     color: black;
   }
 `;
 
 const ProductsMenu = styled.div`
-  // border: 2px solid red;
   z-index: 2;
   position: absolute;
   background-color: white;
@@ -107,6 +110,7 @@ const ProductsMenu = styled.div`
     height: 12rem;
     border-radius: 0.5rem;
     background: #f1f1f1;
+
     img {
       width: 9rem;
       height: 8rem;
@@ -114,26 +118,31 @@ const ProductsMenu = styled.div`
       top: -2.5rem;
     }
   }
+
   p {
     opacity: 0.5;
     margin-top: 0.5rem;
     font-size: 0.8125rem;
+
     &:hover {
       color: #d87d4a;
       opacity: 1;
     }
   }
+
   span {
     color: #d87d4a;
     opacity: 1;
     font-weight: 900;
     margin-left: 0.3rem;
   }
+
   @media (max-width: 800px) {
     flex-direction: column;
     gap: 3.5rem;
   }
 `;
+
 const ProductsMenuOverlay = styled.div`
   width: 100vw;
   height: 100vh;
@@ -144,18 +153,20 @@ const ProductsMenuOverlay = styled.div`
   left: 0;
   z-index: -1; //so it is positioned most behind in the container
 `;
+
 const CartImg = styled.div`
   position: relative;
   display: flex;
-  // border: solid 2px red;
-  // padding: 1rem;
+
   img {
     cursor: pointer;
+
     &:hover {
       color: #d87d4a;
       opacity: 1;
     }
   }
+
   p {
     position: absolute;
     top: -70%;
@@ -163,15 +174,21 @@ const CartImg = styled.div`
     color: #d87d4a;
   }
 `;
+/**
+ * Navbar component.
+ *
+ * @returns {JSX.Element} The rendered Navbar component.
+ */
 export default function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const navigate = useNavigate();
-  const { cart } = useContext(cartContext);
+  const { cart } = useCartContext();
   const totalNumberInCart = Object.entries(cart).length;
 
   return (
     <Container>
+      {/* Hamburger menu */}
       <Hamburger
         src={hamburger}
         onClick={() =>
@@ -181,7 +198,9 @@ export default function Navbar() {
           })
         }
       />
+      {/* Logo */}
       <img src={logo} onClick={() => navigate("/")} />
+      {/* Navigation links */}
       <Directories>
         <StyledLink to="/">
           <h3>HOME</h3>
@@ -196,11 +215,13 @@ export default function Navbar() {
           <h3>EARPHONES</h3>
         </StyledLink>
       </Directories>
+      {/* Cart */}
       <CartImg>
         <img onClick={() => setShowCart((prev) => !prev)} src={cartImage}></img>
         <p>{totalNumberInCart}</p>
       </CartImg>
 
+      {/* Products menu */}
       {showMenu && (
         <>
           <ProductsMenu>
@@ -236,6 +257,8 @@ export default function Navbar() {
           <Overlay callback={setShowMenu}></Overlay>
         </>
       )}
+
+      {/* Cart items */}
       {showCart && (
         <>
           <CartItems />

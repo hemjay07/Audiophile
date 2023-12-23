@@ -1,3 +1,4 @@
+// Importing necessary modules and components
 import React, { useState } from "react";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
@@ -5,6 +6,7 @@ import Button from "../../components/button";
 import ProductLine from "../../components/productLine";
 import ClosingRemarks from "../../components/closignRemarks";
 
+// Importing images
 import Image from "/assets/home/desktop/image-herooo.jpg";
 import MobileHero from "/assets/home/mobile/image-header.jpg";
 import zx9Speaker from "/assets/home/desktop/image-speaker-zx9.png";
@@ -12,6 +14,8 @@ import patterCircles from "/assets/home/desktop/pattern-circles.svg";
 import zx7SpeakerMobile from "/assets/home/mobile/image-speaker-zx7.jpg";
 import zx7SpeakerDesktop from "/assets/home/desktop/image-speaker-zx7.jpg";
 import yx1EarphonesImage from "/assets/home/desktop/image-earphones-yx1.jpg";
+
+// Importing styled components
 import {
   Hero,
   HomeContainer,
@@ -30,10 +34,11 @@ import {
   YX1EarphonesImage,
 } from "./homeStyled";
 
+// Exporting the Home component as the default export
 export default function Home() {
   return (
     <>
-      <Navbar />{" "}
+      <Navbar />
       <HomeContainer>
         <Hero>
           <BlackBackground></BlackBackground>
@@ -52,7 +57,6 @@ export default function Home() {
           <HeroImage>
             <source srcSet={Image} media="(min-width: 1250px)" />
             <source srcSet={MobileHero} media="(max-width: 760px)" />
-
             <img src={Image} alt="Description" />
           </HeroImage>
         </Hero>
@@ -63,7 +67,6 @@ export default function Home() {
               <img src={zx9Speaker} alt="" />
               <img src={patterCircles} alt="" />
             </ZX9SpeakerImages>
-
             <ZX9SpeakerDescription>
               <h2>
                 ZX9 <br />
@@ -83,13 +86,15 @@ export default function Home() {
               <img src={zx7SpeakerMobile} alt="Description" />
             </ZX7SpeakerImage>
             <ZX7SpeakerDescription>
-              <h2>ZX7 SPEAKER</h2> <Button id={5} />
+              <h2>ZX7 SPEAKER</h2>
+              <Button id={5} />
             </ZX7SpeakerDescription>
           </ZX7Speaker>
           <YX1Earphones>
             <YX1EarphonesImage src={yx1EarphonesImage}></YX1EarphonesImage>
             <YX1EarphonesDescription>
-              <h2>YX1 EARPHONES</h2> <Button id={1} />
+              <h2>YX1 EARPHONES</h2>
+              <Button id={1} />
             </YX1EarphonesDescription>
           </YX1Earphones>
           <ClosingRemarks />

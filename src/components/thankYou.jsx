@@ -1,30 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { useContext } from "react";
-import { cartContext } from "../App";
 import styled from "styled-components";
+import productData from "../data.json";
 import Overlay from "./overlay";
 import Tick from "/assets/checkout/icon-order-confirmation.svg";
-import SampleImage from "/assets/cart/image-xx59-headphones.jpg";
-import productData from "../data.json";
 import { figureOutProductsActualName } from "../pages/productDetail/productDetail";
-// import { Navigate } from "react-router-dom";
+import { useCartContext } from "../context/cartContext";
 
 const StyledDiv = styled.div`
   position: absolute;
   max-width: 90vw;
   width: 23rem;
-  //   height: 37.5rem;
   max-height: 95vh;
-
   z-index: 3;
   top: 50%;
   transform: translate(-50%, -50%);
   left: 50%;
   background: #fff;
   padding: 1.5rem;
-  //   padding-right: 0;
   border-radius: 0.5rem;
 
   h2 {
@@ -49,24 +42,28 @@ const StyledDiv = styled.div`
     margin: 1rem 0 1.5rem 0;
     opacity: 0.5;
   }
+
   @media (min-width: 768px) {
     width: 33.75rem;
   }
 `;
+
 const Items = styled.div`
   position: relative;
-
   padding: 1rem;
   background: #f1f1f1;
   border-radius: 0.5rem 0.5rem 0 0;
   text-align: center;
+
   img {
     width: 4rem;
     height: 4rem;
   }
+
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
   ::after {
     content: "";
     position: absolute;
@@ -77,6 +74,7 @@ const Items = styled.div`
     transform: translateX(-50%);
   }
 `;
+
 const ItemPrice = styled.div`
   p:nth-of-type(2) {
     font-size: 0.875rem;
@@ -84,6 +82,7 @@ const ItemPrice = styled.div`
     line-height: 1.5625rem; 
     opacity:0.5
 `;
+
 const Multiple = styled.p`
   margin-left: auto;
   opacity: 0.5;
@@ -92,6 +91,7 @@ const Multiple = styled.p`
   font-weight: 700;
   line-height: 1.5625rem;
 `;
+
 const GrandTotal = styled.div`
   padding: 1rem;
   background: #000;
@@ -99,23 +99,27 @@ const GrandTotal = styled.div`
   > p:nth-of-type(1) {
     opacity: 0.5;
   }
+
   border-radius: 0 0 0.5rem 0.5rem;
 `;
+
 const ItemAndGrandTotal = styled.div`
   @media (min-width: 768px) {
     display: flex;
     width: 100%;
-    // border: solid 2px red;
     justify-content: stretch;
+
     > :first-child {
       flex: 1;
       border-radius: 0.5rem 0 0 0.5rem;
     }
+
     > :last-child {
       flex: 1;
       text-align: center;
       padding: 2.5rem 0rem;
       border-radius: 0 0.5rem 0.5rem 0;
+
       p:last-child {
         font-size: 1.125rem;
         font-weight: 700;
@@ -127,7 +131,6 @@ const ItemAndGrandTotal = styled.div`
 `;
 
 const Others = styled.p`
-  //   border: solid 2px red;
   padding: 1rem;
   background: #f1f1f1;
   text-align: center;
@@ -136,7 +139,7 @@ const Others = styled.p`
 export default function ({ total }) {
   const navigate = useNavigate();
   const [thankYou, setThankYou] = useState(true);
-  const { cart } = useContext(cartContext);
+  const { cart } = useCartContext();
   // let total = 0;
   const shippingFee = 50;
   let vat = total / 10;

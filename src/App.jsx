@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
-import { createContext } from "react";
 
 import Home from "./pages/home/home";
 import Earphones from "./pages/earphones/earphones";
@@ -10,6 +9,7 @@ import Checkout from "./pages/checkout/checkout";
 import Speakers from "./pages/speakers/speakers";
 import ProductDetail from "./pages/productDetail/productDetail";
 import ScrollTo from "./components/scrollTo";
+import { CartProvider } from "./context/cartContext";
 const GlobalStyle = createGlobalStyle`
   p {
     line-height: 1.5625rem;
@@ -51,15 +51,13 @@ const Container = styled.div`
   min-height: 100vh;
 `;
 
-export const cartContext = createContext();
 export default function App() {
   // the key is the Id while the value is the quantity
-  const [cart, setCart] = useState({});
   return (
     <Container>
       <ScrollTo />
       <GlobalStyle />
-      <cartContext.Provider value={{ cart, setCart }}>
+      <CartProvider>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/headphones" element={<Headphones />} />
@@ -68,7 +66,7 @@ export default function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/productDetail/:productId" element={<ProductDetail />} />
         </Routes>
-      </cartContext.Provider>
+      </CartProvider>
     </Container>
   );
 }

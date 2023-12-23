@@ -3,8 +3,8 @@ export const HeadphonesDisplay = styled.div`
   display: grid;
   width: 80%;
   margin: auto;
-  // border: solid 2px green;
   text-align: center;
+
   img {
     width: 100%;
     border-radius: 0.5rem;
@@ -19,28 +19,34 @@ export const HeadphonesDisplay = styled.div`
       cursor: pointer;
     }
   }
+
   p {
     opacity: 0.5;
     line-height: 1.5625rem;
     font-size: 0.9375rem;
   }
+
   h3 {
     color: #d87d4a;
     font-size: 0.875rem;
     font-weight: 400;
     letter-spacing: 0.625rem;
   }
+
   @media (min-width: 768px) and (max-width: 1024px) {
     p {
       width: 70%;
     }
+
     img {
       transform: scale(0.85);
       margin: 0;
     }
   }
+
   @media (min-width: 1240px) {
     margin-top: 4rem;
+
     grid-template-areas:
       "one two"
       "three four"
@@ -49,9 +55,11 @@ export const HeadphonesDisplay = styled.div`
     :nth-child(3) {
       grid-area: four;
     }
+
     :nth-child(4) {
       grid-area: three;
     }
+
     img {
       margin: 0;
       padding: 3.5rem 2rem;
@@ -60,13 +68,12 @@ export const HeadphonesDisplay = styled.div`
 `;
 
 export const Description = styled.div`
-  // border: solid 2px red;
-
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   align-items: center;
   margin-bottom: 7rem;
+
   @media (min-width: 1240px) {
     align-items: start;
     text-align: left;
