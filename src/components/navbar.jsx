@@ -193,7 +193,6 @@ export default function Navbar() {
         src={hamburger}
         onClick={() =>
           setShowMenu((prev) => {
-            console.log(prev);
             return !prev;
           })
         }

@@ -11,7 +11,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.3.1",
+    "@jackfranklin/test-data-bot": "^2.1.0",
     "@testing-library/user-event": "^14.5.1",
+    "faker": "^6.6.6",
     "nanoid": "^5.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

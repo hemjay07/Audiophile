@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import productData from "../data.json";
@@ -137,23 +137,37 @@ const Others = styled.p`
   opacity: 0.5;
 `;
 export default function ({ total }) {
+  // Use react-router-dom's "useNavigate" for navigation between pages
   const navigate = useNavigate();
+  // useState to toggle the thank you message
   const [thankYou, setThankYou] = useState(true);
-  const { cart } = useCartContext();
-  // let total = 0;
+  // Getting cart data from the context API
+  const { cart, se } = useCartContext();
+  // Defining a constant shipping fee
   const shippingFee = 50;
+  // Calculating VAT as 1/10th of the total amount
   let vat = total / 10;
+  // Evaluating the grand total as sum of total amount, shipping fee and VAT
   let grandTotal = total + shippingFee + vat;
+  // Extracting the first item's data from the cart
   const firstItemData = Object.entries(cart)[0];
 
+  // Getting the total number of items in the cart
   const totalNumberInCart = Object.entries(cart).length;
 
-  // scroll to top to display the thankyou message
+  // Scroll to the top of the page to display the thank you message
   scrollTo({
     top: 0,
     left: 0,
     behavior: "smooth",
   });
+
+  // navigate to the home page and reset the cart
+  function handleClick() {
+    navigate("/");
+    setCart({});
+  }
+
   return (
     <>
       {thankYou ? (
@@ -164,20 +178,23 @@ export default function ({ total }) {
             <p>You will receive an email confirmation shortly.</p>
             <ItemAndGrandTotal>
               <div>
+                {/* Purge through the product data and match the cart item with the product list */}
                 {productData
-                  .filter((item) => item.id == firstItemData[0])
+                  .filter((item) => item.id == firstItemData[0] || "")
                   .map((thisProduct, index) => {
                     return (
                       <Items key={index}>
                         <img src={thisProduct.image.cartImage} alt="" />
                         <ItemPrice>
                           <p>{figureOutProductsActualName}</p>
+                          {/* Format the product's price to locale string for better readability */}
                           <p>${thisProduct.price.toLocaleString("en-US")}</p>
                         </ItemPrice>
                         <Multiple>x{firstItemData[1]}</Multiple>
                       </Items>
                     );
                   })}
+                {/* Display the count of other items in the cart */}
                 {totalNumberInCart > 1 ? (
                   <Others>and {totalNumberInCart - 1} other item(s)</Others>
                 ) : (
@@ -186,15 +203,18 @@ export default function ({ total }) {
               </div>
               <GrandTotal>
                 <p>GRAND TOTAL</p>
+                {/* Format the grand total to locale string for better readability */}
                 <p>${grandTotal.toLocaleString("en-US")}</p>
               </GrandTotal>
             </ItemAndGrandTotal>
 
-            <button onClick={() => navigate("/")}>BACK TO HOME</button>
+            {/* Navigate back to the home page on clicking the button */}
+            <button onClick={handleClick}>BACK TO HOME</button>
           </StyledDiv>
+          {/* Using the callback function to unset thank you message */}
           <Overlay callback={setThankYou} />
         </>
-      ) : null}{" "}
+      ) : null}
     </>
   );
 }

@@ -31,8 +31,8 @@ export default function Counter({ productId }) {
   const { cart, setCart } = useCartContext();
 
   // if this product is not in the cart, add it to the cart with a quantity of 0
-  if (!cart.productId) {
-    setCart((prev) => ({ ...prev, [productId]: 0 }));
+  if (!cart[productId]) {
+    setCart((prev) => ({ ...prev, [productId]: 1 }));
   }
 
   // const [cart, setCart] = useState({ 1: 2 });
