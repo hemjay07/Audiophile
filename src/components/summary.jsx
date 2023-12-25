@@ -82,28 +82,26 @@ export default function ({ showThanks }) {
   let vat = total / 10;
   let grandTotal = total + shippingFee + vat;
 
-  // you need the id of the first item because that is how you identify the item to be displayed on the thankYou page
-  const firstItemData = Object.entries(cart)[0];
-  const totalCart = Object.keys(cart).length;
-
-  console.log(firstItemData);
   return (
-    <>
+    <div>
       <Summary>
         <h3>SUMMARY</h3>
-        {Object.entries(cart).map((item) => {
+        {Object.entries(cart).map((item, index) => {
           const thisProduct = productData.filter(
             (product) => product.id == item[0]
           )[0];
-          const key = nanoid();
+          const key = index;
           total = total + thisProduct.price * item[1];
           vat = total / 10;
           grandTotal = total + shippingFee + vat;
+          const porductsActualName = figureOutProductsActualName(
+            thisProduct.name
+          );
           return (
             <Items key={key}>
               <img src={thisProduct.image.cartImage} alt="" />
               <ItemPrice>
-                <p>{figureOutProductsActualName(thisProduct.name)}</p>
+                <p>{porductsActualName}</p>
                 <p>${thisProduct.price.toLocaleString("en-US")}</p>
               </ItemPrice>
               <Multiple>x{item[1]}</Multiple>
@@ -129,8 +127,8 @@ export default function ({ showThanks }) {
         <button type="submit" form="my-form">
           CONTINUE TO PAY
         </button>
-      </Summary>{" "}
-      {showThanks && <ThankYou total={total} />}
-    </>
+      </Summary>
+      {showThanks ? <ThankYou total={total}></ThankYou> : <></>}
+    </div>
   );
 }

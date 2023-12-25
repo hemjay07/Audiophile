@@ -142,7 +142,7 @@ export default function ({ total }) {
   // useState to toggle the thank you message
   const [thankYou, setThankYou] = useState(true);
   // Getting cart data from the context API
-  const { cart, se } = useCartContext();
+  const { cart, setCart } = useCartContext();
   // Defining a constant shipping fee
   const shippingFee = 50;
   // Calculating VAT as 1/10th of the total amount
@@ -164,8 +164,8 @@ export default function ({ total }) {
 
   // navigate to the home page and reset the cart
   function handleClick() {
-    navigate("/");
     setCart({});
+    navigate("/");
   }
 
   return (
@@ -186,7 +186,7 @@ export default function ({ total }) {
                       <Items key={index}>
                         <img src={thisProduct.image.cartImage} alt="" />
                         <ItemPrice>
-                          <p>{figureOutProductsActualName}</p>
+                          <p>{figureOutProductsActualName(thisProduct.name)}</p>
                           {/* Format the product's price to locale string for better readability */}
                           <p>${thisProduct.price.toLocaleString("en-US")}</p>
                         </ItemPrice>
