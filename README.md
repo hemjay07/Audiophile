@@ -1,6 +1,6 @@
 ## Audiophile
 
-> Live link: [[https://portals3.onrender.com](https://mujeeb-audiophile.netlify.app/)]
+> Live link: [https://mujeeb-audiophile.netlify.app/](https://mujeeb-audiophile.netlify.app/)
 
 ### Motivation
 
