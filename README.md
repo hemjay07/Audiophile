@@ -4,98 +4,130 @@
 
 ### Motivation
 
-My friends and I were in spots that could define our careers - we know what we want to be but how do we get there. We quickly realized that most "roadmaps" are generalized, comprehensive and as a result, overwhelming.
+Ever wondered what it takes to develop an intuition for React? This project was born out of that curiosity.
 
-We decided to use AI to build something simpler - personalized to you, what you have learnt/done in the past and what you want to become.
+Is it through building multiple complex applications, exploring documentaries, and distilling findings and challenges into articles? I plan to find out.
+
 
 ### Overview
+Audiophile is a e-commerce website where user get easy access to listening devices such as headphones, speakers and earphones. 
 
-Portals makes it easier to get started in tech as a beginner by generating a personalized roadmap containing quality resources for you.
 
-- You log in using Google Authentication
-- You fill a multi-page form that helps us understand you, what you have done in the past and your current career goal
-- You sit back and see in <2 minutes your personalized roadmap with quality resources.
 ### Preview
 
 ![preview](./preview.jpg)
 
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
-
-## My process
+- Solution URL: [https://github.com/hemjay07/Audiophile](https://github.com/hemjay07/Audiophile)
+- Live Site URL: [https://mujeeb-audiophile.netlify.app/](https://mujeeb-audiophile.netlify.app/)
 
 ### Built with
-
-- Semantic HTML5 markup
-- CSS custom properties
+- React
+- React Testing Library (Vitest)
+- Styled Components
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+- Local Storage
 
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
 
 ### What I learned
+- This project had a lot of complex layout; therefore, I had a lot of hands-on practice with grid and flexbox. I realized how much easier it is using gird template area for layout for different screens.
+  
+Example: 
+  ```css
+  export const Gallery = styled.div`
+  display: grid;
+  gap: 1rem;
+  margin-top: 5.5rem;
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+  @media (min-width: 768px) {
+    grid-template-areas:
+      "one three"
+      "two three ";
 
-To see how you can add code snippets, see below:
+    :nth-child(1) {
+      grid-area: one;
+    }
 
-```html
-<h1>Some HTML code I'm proud of</h1>
+    :nth-child(2) {
+      grid-area: two;
+    }
+
+    :nth-child(3) {
+      grid-area: three;
+      height: 100%;
+    }
+  }
+`;
 ```
 
-```css
-.proud-of-this-css {
-  color: papayawhip;
+- Learnt how to test components that have a use for a wrapper (theme, context etc). To test the component, create a test.utils file with the following content: 
+```javascript
+import React from "react";
+
+// import render from react testing library as rtlRender
+import { render as rtlRender } from "@testing-library/react";
+
+// import necessary contexts
+import { CartProvider, useCartContext } from "../src/context/cartContext";
+
+// create a functin render that uses wrapper provided from react testing library to wrap the children called with the rtlRender function
+function render(ui, { ...options } = {}) {
+  function Wrapper({ children }) {
+    return <CartProvider>{children}</CartProvider>;
+  }
+  return rtlRender(ui, { wrapper: Wrapper, ...options });
 }
+
+// re-export everything
+export * from "@testing-library/react";
+
+// override render method
+export { render };
 ```
+- Import the test.utils file in the test file and simple use the modified render--which is now wrapped with the required context or theme:
+  
+```javascript
+import React from "react";
+import { screen, render } from "./test-utils";
+import userEvent from "@testing-library/user-event";
+import Counter from "../src/components/counter";
+import { describe, expect } from "vitest";
 
-```js
-const proudOfThisFunc = () => {
-  console.log("🎉");
-};
+describe("Counter", () => {
+  test("counter shows when the product is added to the cart", async () => {
+    render(<Counter productId={1} />);
+    const count = screen.getByTestId("count");
+    expect(count).toHaveTextContent("1");
+    const increment = screen.getByRole("button", { name: "+" });
+    const decrement = screen.getByRole("button", { name: "-" });
+    await userEvent.click(increment);
+    expect(screen.getByTestId("count")).toHaveTextContent("2");
+    await userEvent.click(decrement);
+    expect(count).toHaveTextContent("1");
+  });
+});
+
 ```
-
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-**Note: Delete this note and the content within this section and replace with your own learnings.**
 
 ### Continued development
+- Create a bankend or use a headless CMS.
+- Write more unit tests.
+  
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+### Takeaways/Lessons learnt 
+- TypeScript will save you a lot of headaches.
+- Test-driven development is the way. Let your tests streamline your development from the beginning instead of rewriting the components to pass the test later on.
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
-
-## Author
-
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
+- [Kevin Powel lesson on Grid](https://www.youtube.com/watch?v=rg7Fvvl3taU&pp=ygUSZ3JpZCB0bWVwbGF0ZSBhcmVh) - This helped me better understand grid.
+- [Vitest with React Testing Library](https://www.robinwieruch.de/vitest-react-testing-library/) - This amazing guide helped me set up React Testing Library with the Vitest testing environment for a Vite application.
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
+I want to thank myself, me, and Mujeeb for seeing this through to the end.
 
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
