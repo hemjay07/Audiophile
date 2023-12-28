@@ -2,7 +2,7 @@
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
+  - [Screenshot](#preveiw)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
