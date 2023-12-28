@@ -32,7 +32,7 @@ Users should be able to:
 - See an order confirmation modal after checking out with an order summary
 - **Bonus**: Keep track of what's in the cart, even after refreshing the browser (`localStorage` could be used for this if you're not building out a full-stack app)
 
-### Screenshot
+### Preview
 
 ![preview](./preview.jpg)
 
