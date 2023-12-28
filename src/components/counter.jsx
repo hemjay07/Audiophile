@@ -10,13 +10,17 @@ const CounterControler = styled.div`
   width: 7.5rem;
   background: #f1f1f1;
 
-  button {
+  &button {
     width: unset;
     font-size: unset;
     font-style: normal;
     font-weight: unset;
     border: none;
     opacity: 0.25;
+  }
+  &:hover {
+    color: #d87d4a;
+    cursor: pointer;
   }
 `;
 

@@ -95,6 +95,11 @@ export const AddToCartAndCounterControler = styled.div`
 export const AddToCart = styled.button`
   background: #d87d4a;
   height: 3rem;
+  color: #fff;
+  &:hover {
+    background-color: #fbaf85;
+    cursor: pointer;
+  }
 `;
 
 export const Features = styled.div`
@@ -239,5 +244,9 @@ export const CounterControler = styled.div`
     font-weight: unset;
     border: none;
     opacity: 0.25;
+    &:hover {
+      color: #d87d4a;
+      cursor: pointer;
+    }
   }
 `;

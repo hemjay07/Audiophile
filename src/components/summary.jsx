@@ -26,6 +26,10 @@ const Summary = styled.div`
     font-weight: 700;
     letter-spacing: 0.0625rem;
     margin-top: 2rem;
+    &:hover {
+      background-color: #fbaf85;
+      cursor: pointer;
+    }
   }
 `;
 

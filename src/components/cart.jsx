@@ -86,6 +86,14 @@ const Checkout = styled.button`
   margin-top: 0.5rem;
   background-color: #d87d4a;
   cursor: pointer;
+  color: #fff;
+  &:hover {
+    background-color: #fbaf85;
+    cursor: pointer;
+    &[disabled] {
+      cursor: not-allowed;
+    }
+  }
 `;
 
 export default function () {
@@ -131,7 +139,12 @@ export default function () {
         <p>TOTAL</p>
         <p>${total.toLocaleString("en-US")}</p>
       </Total>
-      <Checkout onClick={() => navigate("/checkout")}>CHECKOUT</Checkout>
+      <Checkout
+        disabled={totalCart === 0}
+        onClick={() => navigate("/checkout")}
+      >
+        CHECKOUT
+      </Checkout>
     </Cart>
   );
 }

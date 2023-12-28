@@ -1,5 +1,5 @@
 // Importing required components and values from modules
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import productData from "../../data.json";
@@ -8,6 +8,7 @@ import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import Button from "../../components/button";
 import GoBackButton from "../../components/goBackButton";
+import Alert from "../../components/alert";
 
 // Importing styled components
 import {
@@ -36,6 +37,18 @@ export function figureOutProductsActualName(name) {
 // Main function for the script
 
 export default function () {
+  // alert visibility state
+  const [isVisible, setIsVisible] = useState(false);
+  // useEffect(() => {
+  //   setIsVisible(true);
+
+  //   const timeout = setTimeout(() => {
+  //     setIsVisible(false);
+  //   }, 2000); // Hide the alert after 2 seconds
+
+  //   return () => clearTimeout(timeout);
+  // }, [isVisible]);
+
   // Retrieve productID from current URL parameters
   let { productId } = useParams();
 
@@ -86,6 +99,12 @@ export default function () {
 
   // Function to handle updates to cart
   function handleCartUpdate() {
+    // Set alert to visible
+    setIsVisible(true);
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 2000); // Hide the alert after 2 seconds
+
     // Increase quantity of product in cart
     setCart((prev) => {
       const newQuantity = prev[productId] ? prev[productId] + count : count;
@@ -145,6 +164,7 @@ export default function () {
               </CounterControler>
               {/* Add to Cart button */}
               <AddToCart onClick={handleCartUpdate}>ADD TO CART</AddToCart>
+              {isVisible && <Alert />}
             </AddToCartAndCounterControler>{" "}
           </Description>
         </MainProduct>
