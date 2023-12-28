@@ -1,37 +1,20 @@
-## Table of contents
+## Audiophile
 
-- [Overview](#overview)
-  - [The challenge](#the-challenge)
-  - [Preview](#preveiw)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
-- [Author](#author)
-- [Acknowledgments](#acknowledgments)
+> Live link: [[https://portals3.onrender.com](https://mujeeb-audiophile.netlify.app/)]
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
+### Motivation
 
-## Overview
+My friends and I were in spots that could define our careers - we know what we want to be but how do we get there. We quickly realized that most "roadmaps" are generalized, comprehensive and as a result, overwhelming.
 
-### The challenge
+We decided to use AI to build something simpler - personalized to you, what you have learnt/done in the past and what you want to become.
 
-Users should be able to:
+### Overview
 
-- View the optimal layout for the app depending on their device's screen size
-- See hover states for all interactive elements on the page
-- Add/Remove products from the cart
-- Edit product quantities in the cart
-- Fill in all fields in the checkout
-- Receive form validations if fields are missed or incorrect during checkout
-- See correct checkout totals depending on the products in the cart
-  - Shipping always adds $50 to the order
-  - VAT is calculated as 20% of the product total, excluding shipping
-- See an order confirmation modal after checking out with an order summary
-- **Bonus**: Keep track of what's in the cart, even after refreshing the browser (`localStorage` could be used for this if you're not building out a full-stack app)
+Portals makes it easier to get started in tech as a beginner by generating a personalized roadmap containing quality resources for you.
 
+- You log in using Google Authentication
+- You fill a multi-page form that helps us understand you, what you have done in the past and your current career goal
+- You sit back and see in <2 minutes your personalized roadmap with quality resources.
 ### Preview
 
 ![preview](./preview.jpg)
