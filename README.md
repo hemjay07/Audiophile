@@ -10,7 +10,7 @@ Is it through building multiple complex applications, exploring documentaries, a
 
 
 ### Overview
-Audiophile is a e-commerce website where user get easy access to listening devices such as headphones, speakers and earphones. 
+Audiophile is a e-commerce website where users can shop for listening devices such as earphones, headphones or speakers.
 
 
 ### Preview
@@ -34,7 +34,7 @@ Audiophile is a e-commerce website where user get easy access to listening devic
 
 
 ### What I learned
-- This project had a lot of complex layout; therefore, I had a lot of hands-on practice with grid and flexbox. I realized how much easier it is using gird template area for layout for different screens.
+- This project had a lot of complex layout; therefore, I had a lot of hands-on practice with grid and flexbox. I realized how much easier it is using gird template area for layout of different screens.
   
 Example: 
   ```css
@@ -64,7 +64,7 @@ Example:
 `;
 ```
 
-- Learnt how to test components that have a use for a wrapper (theme, context etc). To test the component, create a test.utils file with the following content: 
+- Learnt how to test components that need wrappers (theme, context etc). To test the component, create a test.utils file with the following content: 
 ```javascript
 import React from "react";
 
@@ -88,7 +88,7 @@ export * from "@testing-library/react";
 // override render method
 export { render };
 ```
-- Import the test.utils file in the test file and simple use the modified render--which is now wrapped with the required context or theme:
+- Import the test.utils file in the test file and simple use the modified render; which is now wrapped with the required context or theme:
   
 ```javascript
 import React from "react";
