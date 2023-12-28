@@ -10,8 +10,7 @@ Is it through building multiple complex applications, exploring documentaries, a
 
 
 ### Overview
-Audiophile is a e-commerce website where users can shop for listening devices such as earphones, headphones or speakers.
-
+Audiophile is an e-commerce platform where users can explore and purchase a variety of premium listening devices, including earphones, headphones, and speakers.
 
 ### Preview
 
