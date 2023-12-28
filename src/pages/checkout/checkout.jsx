@@ -70,6 +70,7 @@ export default function () {
                   {index == 0 && <h3>BILLING DETAILS</h3>}
                   {index == 3 && <h3>SHIPPING INFO</h3>}
                   {index == 7 && <h3>PAYMENT DETAILS</h3>}
+
                   {field.type == "radio" ? (
                     <>
                       <PaymentMethod>Payment Method</PaymentMethod>
