@@ -128,5 +128,6 @@ describe("Counter", () => {
 
 ## Acknowledgments
 
-I want to thank myself, me, and Mujeeb for seeing this through to the end.
+I want to thank myself, me, and Mujeeb for seeing this through to the end. I also want to thank front-end Mentor for providing this wonder designs.
+
 
