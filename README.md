@@ -22,6 +22,28 @@ Audiophile is an e-commerce platform where users can explore and purchase a vari
 - Solution URL: [https://github.com/hemjay07/Audiophile](https://github.com/hemjay07/Audiophile)
 - Live Site URL: [https://mujeeb-audiophile.netlify.app/](https://mujeeb-audiophile.netlify.app/)
 
+### Development Setup
+
+1. Clone the repo
+
+```
+$ git clone https://github.com/hemjay07/Kanban.git kanban
+$ cd kanban
+```
+
+2. Install the dependencies:
+
+```
+$ npm install
+```
+
+3. Run the development server:
+
+```
+$ npm run dev
+```
+4. Navigate to the Home page [http://localhost:5173/](http://localhost:5173/)
+
 ### Built with
 - React
 - React Testing Library (Vitest)
